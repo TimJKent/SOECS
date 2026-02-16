@@ -1,19 +1,14 @@
 #pragma once
 
-#include "Entity.hpp"
+#include "Constants.hpp"
 #include "Signature.hpp"
 
 #include <queue>
 #include <stdexcept>
 #include <array>
-#include <cstdint>
 
 namespace SOECS
 {
-    typedef int32_t EntityId;
-
-    const EntityId INVALID_ENTITY_ID = -1;
-    const EntityId MAX_ENTITIES = 512;
 
     class EntityManager
     {

@@ -1,8 +1,8 @@
 #pragma once
 
+#include "Constants.hpp"
 #include "Entity.hpp"
 
-#include <cstdint>
 #include <unordered_map>
 #include <stdexcept>
 #include <memory>
@@ -10,10 +10,6 @@
 
 namespace SOECS
 {
-    typedef int8_t ComponentTypeId;
-
-    const ComponentTypeId INVALID_COMPONENT_TYPE_ID = -1;
-    const ComponentTypeId MAX_COMPONENTS = 32;
 
     class IComponentArray
     {

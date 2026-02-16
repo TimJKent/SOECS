@@ -10,12 +10,9 @@ namespace SOECS
     class Coordinator
     {
     public:
-        void Init()
+        Coordinator()
+            : component_manager_(std::make_unique<ComponentManager>()), entity_manager_(std::make_unique<EntityManager>()), system_manager_(std::make_unique<SystemManager>())
         {
-            // Create pointers to each manager
-            component_manager_ = std::make_unique<ComponentManager>();
-            entity_manager_ = std::make_unique<EntityManager>();
-            system_manager_ = std::make_unique<SystemManager>();
         }
 
         // Entity methods
@@ -46,7 +43,7 @@ namespace SOECS
             component_manager_->AddComponent<T>(entity, component);
 
             auto signature = entity_manager_->GetSignature(entity);
-            signature.set(component_manager_->GetComponentType<T>(), true);
+            signature.set(component_manager_->GetComponentTypeId<T>(), true);
             entity_manager_->SetSignature(entity, signature);
 
             system_manager_->EntitySignatureChanged(entity, signature);
@@ -58,7 +55,7 @@ namespace SOECS
             component_manager_->RemoveComponent<T>(entity);
 
             auto signature = entity_manager_->GetSignature(entity);
-            signature.set(component_manager_->GetComponentType<T>(), false);
+            signature.set(component_manager_->GetComponentTypeId<T>(), false);
             entity_manager_->SetSignature(entity, signature);
 
             system_manager_->EntitySignatureChanged(entity, signature);
@@ -71,9 +68,9 @@ namespace SOECS
         }
 
         template <typename T>
-        ComponentTypeId GetComponentType()
+        ComponentTypeId GetComponentTypeId()
         {
-            return component_manager_->GetComponentType<T>();
+            return component_manager_->GetComponentTypeId<T>();
         }
 
         // System methods

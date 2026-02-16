@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Component.hpp"
+#include "Constants.hpp"
 
 #include <bitset>
 
